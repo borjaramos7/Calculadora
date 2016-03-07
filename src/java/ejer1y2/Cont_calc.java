@@ -7,6 +7,8 @@ package ejer1y2;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +31,7 @@ public class Cont_calc extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
@@ -36,13 +39,39 @@ public class Cont_calc extends HttpServlet {
             String num1 = request.getParameter("num1");
             String num2 = request.getParameter("num2");
             String operador = request.getParameter("operador");
+            float resultado=0;
+            
             
             float numero1 = Float.parseFloat(num1);
             float numero2 = Float.parseFloat(num2);
             
-            //switch (operador) Por aqui vas ahaciendo el switch
-                    
+                switch (operador) {
+ 
+                        case "+":
+                        resultado=numero1+numero2;
+                        break;
+                        case "-":
+                        resultado=numero1-numero2;
+                        break;
+                        case "*":
+                        resultado=numero1*numero2;
+                        break;
+                        case "/":
+                        resultado=numero1/numero2;
+                        break;
+                        default:
+                        ;
+                        break;
+
+                 }
+            //out.println(numero1+operador+numero2+" "+resultado);
+            request.setAttribute("numero1",Float.toString(numero1));
+            request.setAttribute("numero2",Float.toString(numero2));
+            request.setAttribute("resultado",Float.toString(resultado));
+            request.setAttribute("ope",(operador));
             
+            RequestDispatcher dispatcher = request.getRequestDispatcher("calc.jsp");
+            dispatcher.forward(request, response);
             
             
             /* TODO output your page here. You may use following sample code. */
