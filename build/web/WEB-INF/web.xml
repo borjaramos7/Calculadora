@@ -4,9 +4,49 @@
         <servlet-name>Cont_calc</servlet-name>
         <servlet-class>ejer1y2.Cont_calc</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Funciones</servlet-name>
+        <servlet-class>ejer1y2.Funciones</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cont_tab</servlet-name>
+        <servlet-class>ejer1y2.Cont_tab</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cont_tablas</servlet-name>
+        <servlet-class>ejer1y2.Cont_tablas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cont_acceso</servlet-name>
+        <servlet-class>ejer1y2.Cont_acceso</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>cerrasesion</servlet-name>
+        <servlet-class>ejer1y2.cerrasesion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Cont_calc</servlet-name>
         <url-pattern>/Cont_calc</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Funciones</servlet-name>
+        <url-pattern>/Funciones</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cont_tab</servlet-name>
+        <url-pattern>/Cont_tab</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cont_tablas</servlet-name>
+        <url-pattern>/Cont_tablas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cont_acceso</servlet-name>
+        <url-pattern>/Cont_acceso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cerrasesion</servlet-name>
+        <url-pattern>/cerrasesion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

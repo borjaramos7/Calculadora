@@ -8,7 +8,6 @@ package ejer1y2;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author 2DAW
  */
-public class Cont_calc extends HttpServlet {
+public class Cont_tab extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,67 +30,43 @@ public class Cont_calc extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-            
-            String num1 = request.getParameter("num1");
-            String num2 = request.getParameter("num2");
-            String operador = request.getParameter("operador");
-            float resultado=0;
-            
-            if(!((Funciones.isNumeric(num1) && Funciones.isNumeric(num2)) && (operador.equals("/")
-                    && (num2.equals("0") || num2.equals("0.0")))==false))
-            {  
-                request.setAttribute("error","Has introducido algun parametro erroneo");
-            }
-            else
-            {
-                float numero1 = Float.parseFloat(num1);
-                float numero2 = Float.parseFloat(num2);
-                switch (operador) {
- 
-                        case "+":
-                        resultado=numero1+numero2;
-                        break;
-                        case "-":
-                        resultado=numero1-numero2;
-                        break;
-                        case "*":
-                        resultado=numero1*numero2;
-                        break;
-                        case "/":
-                        resultado=numero1/numero2;
-                        break;
-                        default:
-                        ;
-                        break;
-
-                 }
-            }
-            
-            
-                
-            //out.println(numero1+operador+numero2+" "+resultado);
-            request.setAttribute("numero1",(num1));
-            request.setAttribute("numero2",(num2));
-            request.setAttribute("resultado",Float.toString(resultado));
-            request.setAttribute("ope",(operador));
-            
-            RequestDispatcher dispatcher = request.getRequestDispatcher("calc.jsp");
-            dispatcher.forward(request, response);
             /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet Cont_calc</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet Cont_calc at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
+            
+            String multiplo = request.getParameter("num");
+            if(!(Funciones.isNumeric(multiplo)))
+            {
+                request.setAttribute("error","El numero tiene que ser entero");
+            }
+            else 
+                    {
+                        int multi = Integer.parseInt(multiplo);
+                        if (multi>100 || multi<1)
+                        {
+                            request.setAttribute("error","El numero tiene que estar entre 1 y 100");
+                        }
+                         else{
+                                String tblstr=Creatabla(multi);
+                                request.setAttribute("tablacompleta",tblstr);
+                        }
+                    }
+
+            request.setAttribute("num",multiplo);
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("tablas.jsp");
+            dispatcher.forward(request, response);
         }
+    }
+    
+    protected String Creatabla(int mul)
+    {
+        String tabla="<table><td>";
+                for (int x=1;x<=10;x++){
+                    tabla+="<tr>"+mul+" X "+x+" = "+(x*mul)+"</tr><br>";
+                }
+              tabla+="</td></table>";
+              return tabla;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
